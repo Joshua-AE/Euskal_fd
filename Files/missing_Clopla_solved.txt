@@ -1,0 +1,11 @@
+Original_name	Simplified_name	syn_name
+Carex cuprina	Carex cuprina	Carex otrubae
+Cucubalus baccifer	Cucubalus baccifer	Silene baccifera
+Inula conyza	Inula conyza	Inula conyzae
+Lithospermum purpurocaerulem	Lithospermum purpurocaerulem	Buglossoides purpurocaerulea
+Papaver cambricum	Papaver cambricum	Meconopsis cambrica
+Phyllitis scolopendrium	Phyllitis scolopendrium	Asplenium scolopendrium
+Poa compresa	Poa compresa	Poa compressa
+Pteridium aquilium	Pteridium aquilium	Pteridium aquilinum
+Ranunculus tuberosus	Ranunculus tuberosus	Ranunculus nemorosus
+Taraxacum officinale	Taraxacum officinale	Taraxacum sect. Taraxacum

@@ -1,0 +1,166 @@
+---
+title: "Trait data Bilbo"
+author: "Joshua"
+date: "2023-04-17"
+output: html_document
+---
+
+```{r, warning = FALSE}
+library("tidyverse")
+library("taxize") # try package Taxonstand !!!
+library("data.table") # for rbindlist()
+```
+
+# Synonym list: Step 1
+```{r}
+sp_list <- read_tsv("C:/Users/user/Documents/PhD/Travels/Bilbao/Species_list.txt",
+                      guess_max = Inf, trim_ws = TRUE)
+
+list1 <- as.vector(unique(sp_list$Simplified_name))
+Species_syn <- synonyms(list1, db = "itis")
+# itis:  1M plants, animals, fungi, and microbes of North America and the world
+# tropicos: 6.8M plants of America, the tropics and the world
+# nbn: 7k organisms of all types in the UK
+# worms marine species, pow ?
+syn_table <- Species_syn[!is.na(Species_syn)]
+syn_table <- rbindlist(syn_table, use.names = TRUE, fill = TRUE, idcol = TRUE)
+syn_table <- syn_table %>% select(c(.id, acc_name, syn_name)) %>% rename(Simplified_name = .id, )
+
+write.csv(syn_table, "C:/Users/user/Documents/PhD/Travels/Bilbao/synonym_table_itis.txt", row.names = FALSE)
+```
+
+# Synonym list: Step 2
+```{r}
+syn_table <- read_csv("C:/Users/user/Documents/PhD/Travels/Bilbao/synonym_table_itis.txt", guess_max = Inf)
+sp_list <- read_tsv("C:/Users/user/Documents/PhD/Travels/Bilbao/Species_list.txt",
+                      guess_max = Inf, trim_ws = TRUE)
+Clopla_syn <- read_tsv("C:/Users/user/Documents/PhD/Travels/Bilbao/missing_Clopla_solved.txt", guess_max = Inf)
+
+syn_table <- unique(syn_table) # there are 43 duplicated rows in syn_table
+full_list <- sp_list %>% left_join(syn_table, by = "Simplified_name") # 1225 species and synonyms
+# sp_list$Original_name has 343 species, simplified name has 336 species (removed 7 hybrids etc.)
+full_list$syn_name[is.na(full_list$syn_name)] <- full_list$Simplified_name[is.na(full_list$syn_name)]
+
+Simplified_names <- full_list %>% select(c(Simplified_name)) %>% group_by(Simplified_name) %>% slice_head()
+dif <- anti_join(Simplified_names, full_list, join_by(Simplified_name == syn_name)) # synonyms found for 134 species
+dif$Original_name <- dif$Simplified_name
+dif$acc_name <- NA
+dif$syn_name <- dif$Simplified_name
+full_list <- rbind(full_list, dif)
+
+acc_names <- full_list %>% filter(!is.na(acc_name)) %>% group_by(acc_name) %>% slice_head()
+full_list <- select(full_list, -c(acc_name))
+acc_names$syn_name <- acc_names$acc_name
+acc_names <- acc_names %>% ungroup() %>% select(-c(acc_name))
+full_list <- rbind(full_list, acc_names)
+full_list$syn_name <- str_replace(full_list$syn_name, "ssp.", "subsp.")
+
+full_list <- full_list %>% rbind(Clopla_syn) %>% unique()
+
+#_____________________________ Species frequency
+
+abundance <- read_tsv("C:/Users/user/Documents/PhD/Travels/Bilbao/Database_species_MSc project Jokin_Iratis_PhD.txt",
+                      guess_max = Inf)
+
+abundance$total <- NA
+for(i in 1:nrow(abundance)) {abundance$total[i] <- sum(abundance[i,2:57])}
+abundance <- abundance[,c(1,58,2:57)]
+abundance <- abundance[order(abundance$total, decreasing = TRUE),]
+
+rm(dif, Simplified_names, syn_table, acc_names,i, Clopla_syn)
+```
+
+# Loading Trait databases
+```{r}
+BROT2 <- read_tsv("C:/Users/user/Documents/PhD/Trait data/Irena Axmanova/BROT2.matched-2021-11-24-IA.txt", guess_max = Inf)
+Traits_LEDA <- read_delim("C:/Users/user/Documents/PhD/Trait data/LEDA/SLA_und_geo_neu2.txt", guess_max = Inf, delim = ";")
+Traits_Irena <- readr::read_delim("C:/Users/user/Documents/PhD/Trait data/Irena Axmanova/Joshua-2021-11-28-TRAITS.txt", guess_max = Inf, delim = ";")
+TRY <- readr::read_tsv("C:/Users/user/Documents/PhD/Trait data/New TRY Request/24899.txt")
+TRY$traits <- paste(TRY$TraitID, TRY$TraitName, sep = " ")
+Pladias <- read_tsv("C:/Users/user/Documents/PhD/Trait data/Irena Axmanova/Pladias.trait.table.corrected.matched.2021-11-24-IA.txt", guess_max = Inf) #
+
+Clopla <- read_tsv("C:/Users/user/Documents/PhD/Trait data/Clopla/Clopla.txt", guess_max = Inf, na = c("", "NA", "null"))
+Clopla$lat_name <- str_replace(Clopla$lat_name, " agg\\.", "")
+#Clopla2 <- filter(Clopla, rank == "Species" | rank == "Subspecies" | rank == "Aggregate" | rank == "Variety")
+#Clopla2$Simplified_name <- str_replace(Clopla2$lat_name, " subsp\\..*| var\\..*| agg\\..*|-agg\\..*", "")
+#Clopla2 <- Clopla2[,c(168, 1:167)]
+#rank_order <- c("Species", "Aggregate", "Subspecies", "Variety")
+#Clopla2 <- Clopla2 %>% group_by(Simplified_name, rank)
+#Clopla2 <- Clopla2[order(Clopla2$Simplified_name, match(Clopla2$rank, rank_order)), ]
+#Clopla2 <- Clopla2 %>% group_by(Simplified_name) %>% filter(row_number()==1)
+#rm(rank_order)
+```
+
+# SLA
+```{r}
+# BROT2
+BROT2_SLA <- BROT2 %>% filter(Trait == "SLA") %>% group_by(Shortest.name) %>%
+  summarise(`SLA BROT2` = mean(as.numeric(Data), na.rm = TRUE)) 
+trait_table <- full_list %>% left_join(BROT2_SLA, join_by(Simplified_name == Shortest.name)) %>%
+  left_join(BROT2_SLA, join_by(syn_name == Shortest.name))
+
+#LEDA
+LEDA_sla <- Traits_LEDA %>% filter(`general method` != "laboratory/greenhouse/garden experiment") # removed 396 observations
+LEDA_sla <- LEDA_sla %>% group_by(`SBS name`) %>% summarise(`sla LEDA [mm2/mg]` = median(`single value [mm^2/mg]`, na.rm = TRUE))
+
+trait_table <- trait_table %>% left_join(LEDA_sla, join_by(Simplified_name == `SBS name`)) %>%
+  left_join(LEDA_sla, join_by(syn_name == `SBS name`))
+
+#Trait data by Irena
+trait_table <- trait_table %>% left_join(Traits_Irena[,c(1,32:41)], join_by(Simplified_name == Species.name)) %>%
+  left_join(Traits_Irena[,c(1,32:41)], join_by(syn_name == Species.name))
+
+#TRY
+sla_TRY <- c(3115,3116, 3117) # sla 3115 petiole excluded, 3116 included, 3117 undefined, (125 sla for fresh mass does not add new sp)
+sla_order <- c(3115, 3117, 3116)
+TRY_sla <- filter(TRY, TraitID %in% sla_TRY & StdValue <= 400 & StdValue > 0) %>% group_by(AccSpeciesName, TraitID) %>%
+  summarise(`sla TRY [mm2/mg]` = median(StdValue, na.rm = TRUE))
+TRY_sla <- TRY_sla[order(TRY_sla$AccSpeciesName, match(TRY_sla$TraitID, sla_order)), ]
+TRY_sla <- TRY_sla %>% group_by(AccSpeciesName)  %>% filter(row_number()==1) %>% select(-c(TraitID))
+trait_table <- trait_table %>% left_join(TRY_sla, join_by(Simplified_name == AccSpeciesName)) %>%
+  left_join(TRY_sla, join_by(syn_name == AccSpeciesName))
+
+#Pladias
+Pladias_sla <- Pladias %>% filter(is.na(Exclude.for.matching)) %>% group_by(Shortest.name) %>% summarise(`sla Pladias [mm2/mg]` = mean(SLA, na.rm = TRUE))
+Pladias_sla[Pladias_sla$`sla Pladias [mm2/mg]` == "NaN", "sla Pladias [mm2/mg]"] <- NA
+
+trait_table <- trait_table %>% left_join(Pladias_sla, join_by(Simplified_name == Shortest.name)) %>%
+  left_join(Pladias_sla, join_by(syn_name == Shortest.name))
+
+sla_table <- aggregate(trait_table[,c(5:32)], list(trait_table$Simplified_name), FUN = mean, na.rm = TRUE)
+sla_table[is.na(sla_table)] <- 0
+sla_table$SLA <- NA
+for(i in 1:nrow(sla_table)){sla_table$SLA[i] <- sum(sla_table[i,2:29])}
+
+sla_table <- sla_table %>% filter(SLA == 0) %>% select(Group.1)
+write.csv(sla_table, "C:/Users/user/Documents/PhD/Travels/Bilbao/missing_SLA.txt", row.names = FALSE)
+# Best match between BROT2 and abundance is for TaxonOriginal, with 157 mismatches
+# 75 mismatched species between LEDA SBS name and abundance
+abundance2 <- abundance %>% rename(`SBS name` = Species)
+test <- anti_join(abundance2, Traits_LEDA, by = "SBS name")
+```
+
+# Reproduction and dispersal
+```{r}
+Disp <- left_join(full_list, Clopla, join_by(syn_name == lat_name))
+Disp <- filter(Disp, !is.na(rank))
+length(unique(Disp$Simplified_name)) # 291 out of 336 are in Clopla, 45 missing
+Disp <- select(Disp, c(1:3, 7, 32:48, 83, 92:109))
+# LS Lateral spreading distance by clonal gr, SO Storage organ, VP Vegetative propagation and disp (not considering seeds!!!)
+
+# which plants are not in Clopla?
+#missing <- full_list %>% anti_join(Disp, by = "Simplified_name") %>% unique()# 48 species with 90 synonyms etc.
+#write.csv(missing, "C:/Users/user/Documents/PhD/Travels/Bilbao/missing_Clopla.txt", row.names = FALSE)
+
+LS <- Disp %>% select(c(1:3, 22)) %>% filter(!is.na(LS_mean) & !syn_name %in% c("Mentha spicata", "Vicia tenuifolia"))
+SO <- Disp %>% select(c(1:3, 5:21)) %>% mutate(across(4:20, as.integer), Sto_organ = rowSums(across(4:20), na.rm = TRUE)) %>% na.omit()
+SO <- filter(SO, !syn_name %in% c("Vicia tenuifolia", "Vicia dalmatica", "Mentha spicata", "Dryopteris expansa"))
+VP <- Disp %>% select(1:3, 23:40) %>% mutate(across(4:21, as.integer), Veg_prop = rowSums(across(4:21), na.rm = TRUE)) %>% na.omit() %>% unique()
+VP <- filter(VP, !syn_name %in% c("Vicia tenuifolia", "Vicia dalmatica", "Mentha spicata"))
+
+Disp <- sp_list %>% left_join(LS[,c(2,4)], by = "Simplified_name") %>% left_join(SO[,c(2,21)], by = "Simplified_name") %>% left_join(VP[,c(2,22)], by = "Simplified_name") %>% unique()
+Disp <- left_join(Disp, abundance[,c(1:2)], join_by(Original_name == Species))
+rm(LS, SO, VP)
+```
+
+# Seed traits, seed dispersal!

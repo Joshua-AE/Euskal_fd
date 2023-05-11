@@ -1,0 +1,12 @@
+.Rproj.user
+.git
+.owncloudsync
+.RData
+.Rhistory
+.sync_journal
+.sync_journal.db-shm
+.sync_journal.db.wal
+Funding/
+Leaf scans/
+Project planning/
+QGIS/
