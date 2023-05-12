@@ -13,8 +13,7 @@ library("data.table") # for rbindlist()
 
 # Synonym list: Step 1
 ```{r}
-sp_list <- read_tsv("C:/Users/user/Documents/PhD/Travels/Bilbao/Species_list.txt",
-                      guess_max = Inf, trim_ws = TRUE)
+sp_list <- read_tsv("../Files/Species_list.txt", guess_max = Inf, trim_ws = TRUE)
 
 list1 <- as.vector(unique(sp_list$Simplified_name))
 Species_syn <- synonyms(list1, db = "itis")
@@ -26,15 +25,14 @@ syn_table <- Species_syn[!is.na(Species_syn)]
 syn_table <- rbindlist(syn_table, use.names = TRUE, fill = TRUE, idcol = TRUE)
 syn_table <- syn_table %>% select(c(.id, acc_name, syn_name)) %>% rename(Simplified_name = .id, )
 
-write.csv(syn_table, "C:/Users/user/Documents/PhD/Travels/Bilbao/synonym_table_itis.txt", row.names = FALSE)
+write.csv(syn_table, "../Files/synonym_table_itis.txt", row.names = FALSE)
 ```
 
 # Synonym list: Step 2
 ```{r}
-syn_table <- read_csv("C:/Users/user/Documents/PhD/Travels/Bilbao/synonym_table_itis.txt", guess_max = Inf)
-sp_list <- read_tsv("C:/Users/user/Documents/PhD/Travels/Bilbao/Species_list.txt",
-                      guess_max = Inf, trim_ws = TRUE)
-Clopla_syn <- read_tsv("C:/Users/user/Documents/PhD/Travels/Bilbao/missing_Clopla_solved.txt", guess_max = Inf)
+syn_table <- read_csv("../Files/synonym_table_itis.txt", guess_max = Inf)
+sp_list <- read_tsv("../Files/Species_list.txt", guess_max = Inf, trim_ws = TRUE)
+Clopla_syn <- read_tsv("../Files/missing_Clopla_solved.txt", guess_max = Inf)
 
 syn_table <- unique(syn_table) # there are 43 duplicated rows in syn_table
 full_list <- sp_list %>% left_join(syn_table, by = "Simplified_name") # 1225 species and synonyms
@@ -59,8 +57,7 @@ full_list <- full_list %>% rbind(Clopla_syn) %>% unique()
 
 #_____________________________ Species frequency
 
-abundance <- read_tsv("C:/Users/user/Documents/PhD/Travels/Bilbao/Database_species_MSc project Jokin_Iratis_PhD.txt",
-                      guess_max = Inf)
+abundance <- read_tsv("../Files/Database_species_MSc project Jokin_Iratis_PhD.txt", guess_max = Inf)
 
 abundance$total <- NA
 for(i in 1:nrow(abundance)) {abundance$total[i] <- sum(abundance[i,2:57])}
@@ -133,7 +130,7 @@ sla_table$SLA <- NA
 for(i in 1:nrow(sla_table)){sla_table$SLA[i] <- sum(sla_table[i,2:29])}
 
 sla_table <- sla_table %>% filter(SLA == 0) %>% select(Group.1)
-write.csv(sla_table, "C:/Users/user/Documents/PhD/Travels/Bilbao/missing_SLA.txt", row.names = FALSE)
+write.csv(sla_table, "../Files/missing_SLA.txt", row.names = FALSE)
 # Best match between BROT2 and abundance is for TaxonOriginal, with 157 mismatches
 # 75 mismatched species between LEDA SBS name and abundance
 abundance2 <- abundance %>% rename(`SBS name` = Species)
@@ -150,7 +147,7 @@ Disp <- select(Disp, c(1:3, 7, 32:48, 83, 92:109))
 
 # which plants are not in Clopla?
 #missing <- full_list %>% anti_join(Disp, by = "Simplified_name") %>% unique()# 48 species with 90 synonyms etc.
-#write.csv(missing, "C:/Users/user/Documents/PhD/Travels/Bilbao/missing_Clopla.txt", row.names = FALSE)
+#write.csv(missing, "../Files/missing_Clopla.txt", row.names = FALSE)
 
 LS <- Disp %>% select(c(1:3, 22)) %>% filter(!is.na(LS_mean) & !syn_name %in% c("Mentha spicata", "Vicia tenuifolia"))
 SO <- Disp %>% select(c(1:3, 5:21)) %>% mutate(across(4:20, as.integer), Sto_organ = rowSums(across(4:20), na.rm = TRUE)) %>% na.omit()
@@ -158,9 +155,11 @@ SO <- filter(SO, !syn_name %in% c("Vicia tenuifolia", "Vicia dalmatica", "Mentha
 VP <- Disp %>% select(1:3, 23:40) %>% mutate(across(4:21, as.integer), Veg_prop = rowSums(across(4:21), na.rm = TRUE)) %>% na.omit() %>% unique()
 VP <- filter(VP, !syn_name %in% c("Vicia tenuifolia", "Vicia dalmatica", "Mentha spicata"))
 
-Disp <- sp_list %>% left_join(LS[,c(2,4)], by = "Simplified_name") %>% left_join(SO[,c(2,21)], by = "Simplified_name") %>% left_join(VP[,c(2,22)], by = "Simplified_name") %>% unique()
-Disp <- left_join(Disp, abundance[,c(1:2)], join_by(Original_name == Species))
-rm(LS, SO, VP)
+Disp1 <- sp_list %>% left_join(LS[,c(2,4)], by = "Simplified_name") %>% left_join(SO[,c(2,4:21)], by = "Simplified_name") %>% left_join(VP[,c(2,4:22)], by = "Simplified_name") %>% unique()
+Disp1 <- left_join(Disp1, abundance[,c(1:2)], join_by(Original_name == Species))
+write.table(Disp1, "../Files/Clonal_and_Storage.txt", row.names = FALSE, sep = "\t")
+
+#rm(LS, SO, VP)
 ```
 
 # Seed traits, seed dispersal!

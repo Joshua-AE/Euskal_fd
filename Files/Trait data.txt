@@ -26,7 +26,7 @@ Symphytum	tuberosum	18.04.	BEA3	2	5	1.601	A011	0.241		0.150530918		1
 Rosa	canina	20.04.	CAL3	3	5	0.384	B049	0.133		0.346354167		1
 Rosa	canina	20.04.	CAL3	2	5	0.44	B048	0.162		0.368181818		1
 Rosa	canina	20.04.	CAL3	1	5	0.304	B047	0.111		0.365131579		1
-Cardamine	pratensis	20.04.	CAL3	4	1	0.138	B046	0.014		0.101449275	LDMC outlier	1
+Cardamine	pratensis	20.04.	CAL3	4	1	0.138	B046	0.014		0.101449275		1
 Cardamine	pratensis	20.04.	CAL3	3	4	0.531	B045	0.089		0.167608286		1
 Cardamine	pratensis	20.04.	CAL3	2	2	0.622	B044	0.097		0.155948553		1
 Cardamine	pratensis	20.04.	CAL3	1	3	0.63	B043	0.087		0.138095238		1
@@ -130,7 +130,7 @@ Holcus	mollis	20.04.	CAL3	2	5	0.185	B021	0.047		0.254054054		2
 Holcus	mollis	20.04.	CAL3	3	5	0.264	B020	0.078		0.295454545		2
 Ranunculus	tuberosus	20.04.	CAL3	1	5	2.479	B019	0.519		0.209358612		2
 Ranunculus	tuberosus	20.04.	CAL3	2	5	1.614	B018	0.331		0.205080545		2
-Ranunculus	tuberosus	20.04.	CAL3	3	5	1.985	B017	0.327		0.164735516	LDMC outlier	2
+Ranunculus	tuberosus	20.04.	CAL3	3	5	1.985	B017	0.327		0.164735516		2
 Melica	uniflora	20.04.	CAL3	1	5	0.2	B016	0.064		0.32		2
 Melica	uniflora	20.04.	CAL3	2	3	0.154	B015	0.046		0.298701299		2
 Melica	uniflora	20.04.	CAL3	3	5	0.248	B014	0.071		0.286290323		2
@@ -200,7 +200,7 @@ Fritillaria	pyrenaica	26.04.	SEN2	1	5	0.314	D058	0.056		0.178343949		3
 Conopodium	pyrenaeum	26.04.	ABO2	4	4	1.317	D074	0.217		0.164768413		3
 Conopodium	pyrenaeum	26.04.	ABO2	3	3	1.044	D075	0.149		0.142720307		3
 Conopodium	pyrenaeum	26.04.	ABO2	2	4	1.236	D076	0.195		0.15776699		3
-Conopodium	pyrenaeum	26.04.	ABO2	1	1	1.054	D077	0.131		0.124288425	LDMC outlier	3
+Conopodium	pyrenaeum	26.04.	ABO2	1	1	1.054	D077	0.131		0.124288425		3
 Pulmonaria	longifolia	26.04.	ABO2	6	5	2.615	D064	0.361		0.138049713		3
 Pulmonaria	longifolia	26.04.	ABO2	5	3	1.368	D065	0.189		0.138157895		3
 Pulmonaria	longifolia	26.04.	ABO2	4	5	2.047	D066	0.289		0.141182218		3
@@ -215,3 +215,77 @@ Valeriana	pyrenaica	26.04.	ABO2	1	5	5.874	D030	0.695		0.118318012		3
 Valeriana	pyrenaica	26.04.	ABO2	3	5	12.117	D031	1.572	D032	0.129735083		3
 Valeriana	pyrenaica	26.04.	ABO2	4	5	4.775	D033	0.533		0.111623037		3
 Scilla	lilio-hyacinthus	26.04.	ABO2	3	5	8.89	D078	0.669		0.075253093		3
+Potentilla	montana	08.05.	ARAN2	10	3	0.171	F003	0.045		0.263157895		4
+Potentilla	montana	08.05.	ARAN2	9	5	0.515	F004	0.128		0.248543689		4
+Potentilla	montana	08.05.	ARAN2	8	3	0.343	F005	0.085		0.247813411		4
+Potentilla	montana	08.05.	ARAN2	7	4	0.361	F006	0.084		0.232686981		4
+Potentilla	montana	08.05.	ARAN2	6	2	0.371	F007	0.088		0.237196765		4
+Potentilla	montana	08.05.	ARAN2	5	3	0.77	F008	0.196		0.254545455		4
+Potentilla	montana	08.05.	ARAN2	4	5	0.493	F009	0.116		0.235294118		4
+Potentilla	montana	08.05.	ARAN2	3	3	0.346	F010	0.084		0.242774566		4
+Potentilla	montana	08.05.	ARAN2	2	2	0.331	F011	0.091		0.274924471		4
+Potentilla	montana	08.05.	ARAN2	1	5	0.411	F012	0.1		0.243309002		4
+Ajuga	reptans	09.05.	UR1	1	4	1.024	G057	0.171		0.166992188		4
+Ajuga	reptans	09.05.	UR1	2	5	1.488	G058	0.235		0.157930108		4
+Ajuga	reptans	09.05.	UR1	3	7	1.366	G059	0.209		0.153001464		4
+Ajuga	reptans	09.05.	UR1	4	5	0.733	G060	0.124		0.169167804		4
+Viola	reichenbachiana	09.05.	UR1	1	7	0.611	G061	0.121		0.198036007		4
+Viola	reichenbachiana	09.05.	UR1	2	3	0.355	G062	0.071		0.2		4
+Lonicera	periclymenum	09.05.	UR1&2	1	5	0.55	G017	0.148		0.269090909		4
+Lonicera	periclymenum	09.05.	UR1&2	2	5	0.894	G018	0.18		0.201342282		4
+Lonicera	periclymenum	09.05.	UR1&2	3	4	1.004	G019	0.223		0.222111554		4
+Lonicera	periclymenum	09.05.	UR1&2	4	5	1.078	G020	0.231		0.214285714		4
+Viola	hirta	09.05.	UR1&2	1	6	1.761	G021	0.322		0.182850653		4
+Viola	hirta	09.05.	UR1&2	2	5	1.699	G022	0.346		0.203649205		4
+Viola	hirta	09.05.	UR1&2	3	5	1.505	G023	0.307		0.203986711		4
+Crocus	nudiflorus	08.05.	ARAN2	2	3	1.211	F001	0.253		0.208918249		4
+Crocus	nudiflorus	08.05.	ARAN2	1	3	0.509	F002	0.126		0.247544204		4
+Hypericum	hirsutum	09.05.	UR2	1	7	0.19	G011	0.042		0.221052632		4
+Hypericum	hirsutum	09.05.	UR1&2	2	7	0.195	G012	0.044		0.225641026		4
+Hypericum	hirsutum	09.05.	UR1&2	3	7	0.337	G013	0.067		0.198813056		4
+Hypericum	hirsutum	09.05.	UR1&2	4	7	0.39	G014	0.089		0.228205128		4
+Hypericum	hirsutum	09.05.	UR1&2	5	5	0.171	G015	0.037		0.216374269		4
+Hypericum	hirsutum	09.05.	UR1&2	6	7	0.178	G016	0.045		0.252808989		4
+Viola	reichenbachiana	09.05.	UR1	3	7	0.752	G063	0.144		0.191489362		4
+Viola	reichenbachiana	09.05.	UR1	4	5	0.615	G064	0.126		0.204878049		4
+Viola	reichenbachiana	09.05.	UR1	5	3	0.397	G065	0.086		0.216624685		4
+Brachypodium	sylvaticum	09.05.	UR2	1	7	0.494	G001	0.135		0.273279352		4
+Brachypodium	sylvaticum	09.05.	UR2	2	5	0.613	G002	0.162		0.264274062		4
+Brachypodium	sylvaticum	09.05.	UR2	3	5	0.558	G003	0.141		0.252688172		4
+Brachypodium	sylvaticum	09.05.	UR2	4	5	0.651	G004	0.164		0.251920123		4
+Brachypodium	sylvaticum	09.05.	UR2	5	5	0.379	G005	0.107		0.2823219		4
+Carex	flacca	09.05.	UR2	1	5	0.572	G006	0.148		0.258741259		4
+Carex	flacca	09.05.	UR2	2	5	0.685	G007	0.143		0.208759124		4
+Carex	flacca	09.05.	UR2	3	4	0.663	G008	0.185		0.279034691		4
+Carex	flacca	09.05.	UR2	4	5	0.634	G009	0.205		0.323343849		4
+Carex	flacca	09.05.	UR2	5	5	0.911	G010	0.246		0.270032931		4
+Tamus	communis	09.05.	UR1	1	5	3.029	G037	0.394		0.130075933		4
+Tamus	communis	09.05.	UR1	2	4	1.738	G038	0.208		0.119677791		4
+Tamus	communis	09.05.	UR1	3	5	2.863	G039	0.395		0.137967167		4
+Tamus	communis	09.05.	UR1	4	5	3.523	G040	0.447		0.1268805		4
+Tamus	communis	09.05.	UR1	5	6	5.378	G041	0.576	G042	0.107103012		4
+Rubia	peregrina	09.05.	UR1	1	7	0.485	G024	0.087		0.179381443		4
+Rubia	peregrina	09.05.	UR1	2	7	0.217	G025	0.031		0.142857143		4
+Rubia	peregrina	09.05.	UR1	3	7	0.173	G026	0.032		0.184971098		4
+Rubia	peregrina	09.05.	UR1	4	7	0.238	G027	0.043		0.180672269		4
+Rubia	peregrina	09.05.	UR1	5	6	0.309	G028	0.048		0.155339806		4
+Rubia	peregrina	09.05.	UR1	6	7	0.208	G029	0.032		0.153846154		4
+Rubia	peregrina	09.05.	UR1	7	7	0.363	G030	0.061		0.168044077		4
+Pulmonaria	longifolia	09.05.	UR1	1	5	2.388	G031	0.33		0.138190955		4
+Pulmonaria	longifolia	09.05.	UR1	2	5	1.6	G032	0.209		0.130625		4
+Pulmonaria	longifolia	09.05.	UR1	3	3	1.664	G033	0.212		0.127403846		4
+Pulmonaria	longifolia	09.05.	UR1	4	4	4.54	G034	0.566		0.124669604		4
+Pulmonaria	longifolia	09.05.	UR1	5	6	6.651	G035	0.888	G036	0.133513757		4
+Sanicula	europaea	09.05.	UR1	1	5	0.682	G043	0.162		0.237536657		4
+Sanicula	europaea	09.05.	UR1	2	5	1.482	G045	0.328		0.221322537		4
+Sanicula	europaea	09.05.	UR1	3	4	0.706	G046	0.156		0.220963173		4
+Sanicula	europaea	09.05.	UR1	4	5	1.571	G047	0.362		0.23042648		4
+Lonicera	xylosteum	09.05.	UR1	1	7	0.364	G048	0.133		0.365384615		4
+Lonicera	xylosteum	09.05.	UR1	2	7	0.367	G049	0.124		0.337874659		4
+Lonicera	xylosteum	09.05.	UR1	3	7	0.491	G050	0.145		0.295315682		4
+Lonicera	xylosteum	09.05.	UR1	4	6	0.273	G051	0.079		0.289377289		4
+Hedera	hibernica	09.05.	UR1	1	7	1.427	G052	0.373		0.261387526		4
+Hedera	hibernica	09.05.	UR1	2	5	0.894	G053	0.302		0.337807606		4
+Hedera	hibernica	09.05.	UR1	3	4	0.692	G054	0.17		0.24566474		4
+Hedera	hibernica	09.05.	UR1	4	3	0.486	G055	0.116		0.238683128		4
+Hedera	hibernica	09.05.	UR1	5	3	0.434	G056	0.143		0.329493088		4

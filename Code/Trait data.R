@@ -1,5 +1,5 @@
 library("tidyverse")
-trait <- read_tsv("C:/Users/user/Documents/PhD/Travels/Bilbao/Trait data.txt", guess_max = Inf)
+trait <- read_tsv("./Files/Trait data.txt", guess_max = Inf)
 trait$sp_name <- paste(trait$Genus, trait$Species, sep = " ") # combined species name
 LDMC <- trait %>% group_by(sp_name) %>% summarise(LDMC_mean = mean(LDMC), LDMC_std = sqrt(var(LDMC)))
 trait <- left_join(trait, LDMC, by = "sp_name")
