@@ -6,4 +6,4 @@ trait <- left_join(trait, LDMC, by = "sp_name")
 trait$out <- case_when(trait$LDMC > (trait$LDMC_mean + trait$LDMC_std*2) ~ "up",
                        trait$LDMC < (trait$LDMC_mean - trait$LDMC_std*2) ~ "down") 
 # determines outliers that are below (down) or above (up) mean LDMC +- 2* standard deviaton
-#test
+
