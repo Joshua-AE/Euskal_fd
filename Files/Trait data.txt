@@ -1,4 +1,4 @@
-Genus	Species	Collection day	Plot ID	Individual Nr.	Bulk Nr. of leaves	Wet mass	Leaf scan code 1	Dry mass	Leaf scan code 2	LDMC	Remark	Bag
+Genus	Species	Collection day	Plot ID	Individual Nr	Bulk Nr of leaves	Wet mass [g]	Leaf scan code 1	Dry mass [g]	Leaf scan code 2	LDMC [g/g]	Remark	Bag
 Symphytum	tuberosum	20.04.	CAL3	3	3	0.797	B036	0.122		0.153074028		1
 Symphytum	tuberosum	20.04.	CAL3	2	5	1.918	B035	0.235		0.122523462		1
 Conopodium	pyrenaeum	20.04.	CAL3	4	1	0.269	B032	0.04		0.148698885		1
@@ -55,7 +55,7 @@ Lilium	martagon	21.04.	SE1	2	5	2.418	C038	0.334		0.138130687		1
 Ajuga	reptans	20.04.	CAL3	2	5	0.636	B038	0.112		0.176100629		1
 Ajuga	reptans	20.04.	CAL3	1	2	0.977	B037	0.286		0.292732856		1
 Ranunculus	auricomus	25.04.	AMA2	6	4	0.505	D001	0.081		0.16039604		1
-Ranunculus	auricomus	25.04.	AMA2	5	5	0.801	D002	0.127		0.15855181	prime sample	1
+Ranunculus	auricomus	25.04.	AMA2	5	5	0.801	D002	0.127		0.15855181		1
 Ranunculus	auricomus	25.04.	AMA2	4	4	0.513	D003	0.078		0.152046784		1
 Ranunculus	auricomus	25.04.	AMA2	3	2	0.454	D004	0.066		0.145374449		1
 Ranunculus	auricomus	25.04.	AMA2	2	5	0.562	D005	0.08		0.142348754		1
@@ -170,11 +170,11 @@ Ranunculus	tuberosus	26.04.	ABO2	6	5	1.234	D011	0.239		0.193679092		3
 Ranunculus	tuberosus	26.04.	ABO2	5	5	0.821	D012	0.153		0.1863581		3
 Ranunculus	tuberosus	26.04.	ABO2	4	5	0.951	D013	0.177		0.186119874		3
 Ranunculus	tuberosus	26.04.	ABO2	3	5	1.265	D014	0.25		0.197628458		3
-Scilla	lilio-hyacinthus	26.04.	ABO2	2	5	12.423	D079	0.848		0.068260485		3
-Scilla	lilio-hyacinthus	26.04.	ABO2	1	5	13.393	D080	1.036		0.077353842		3
-Scilla	lilio-hyacinthus	26.04.	ABO2	2	5	4.644	D025	0.426		0.091731266		3
-Scilla	lilio-hyacinthus	26.04.	ABO2	3	5	7.088	D026	0.605		0.08535553		3
-Scilla	lilio-hyacinthus	26.04.	ABO2	1	5	8.208	D027	0.63		0.076754386		3
+Scilla	lilio-hyacinthus	26.04.	ABO2	21	5	12.423	D079	0.848		0.068260485		3
+Scilla	lilio-hyacinthus	26.04.	ABO2	11	5	13.393	D080	1.036		0.077353842		3
+Scilla	lilio-hyacinthus	26.04.	ABO2	22	5	4.644	D025	0.426		0.091731266		3
+Scilla	lilio-hyacinthus	26.04.	ABO2	31	5	7.088	D026	0.605		0.08535553		3
+Scilla	lilio-hyacinthus	26.04.	ABO2	12	5	8.208	D027	0.63		0.076754386		3
 Crocus	nudiflorus	26.04.	ABO2	9	3	0.234	D059	0.057		0.243589744		3
 Crocus	nudiflorus	26.04.	ABO2	8	2	0.195	D060	0.045		0.230769231		3
 Crocus	nudiflorus	26.04.	ABO2	7	3	0.461	D061	0.097		0.210412148		3
@@ -214,7 +214,7 @@ Valeriana	pyrenaica	26.04.	ABO2	2	5	10.215	D028	1.314	D029	0.128634361		3
 Valeriana	pyrenaica	26.04.	ABO2	1	5	5.874	D030	0.695		0.118318012		3
 Valeriana	pyrenaica	26.04.	ABO2	3	5	12.117	D031	1.572	D032	0.129735083		3
 Valeriana	pyrenaica	26.04.	ABO2	4	5	4.775	D033	0.533		0.111623037		3
-Scilla	lilio-hyacinthus	26.04.	ABO2	3	5	8.89	D078	0.669		0.075253093		3
+Scilla	lilio-hyacinthus	26.04.	ABO2	32	5	8.89	D078	0.669		0.075253093		3
 Potentilla	montana	08.05.	ARAN2	10	3	0.171	F003	0.045		0.263157895		4
 Potentilla	montana	08.05.	ARAN2	9	5	0.515	F004	0.128		0.248543689		4
 Potentilla	montana	08.05.	ARAN2	8	3	0.343	F005	0.085		0.247813411		4
@@ -289,3 +289,20 @@ Hedera	hibernica	09.05.	UR1	2	5	0.894	G053	0.302		0.337807606		4
 Hedera	hibernica	09.05.	UR1	3	4	0.692	G054	0.17		0.24566474		4
 Hedera	hibernica	09.05.	UR1	4	3	0.486	G055	0.116		0.238683128		4
 Hedera	hibernica	09.05.	UR1	5	3	0.434	G056	0.143		0.329493088		4
+Brachypodium	rupestre	17.07.	ORGI1	1	3	0.164	H001	0.044		0.268292683		5
+Brachypodium	rupestre	17.07.	ORGI1	2	4	0.238	H002	0.066		0.277310924		5
+Brachypodium	rupestre	17.07.	ORGI1	3	4	0.353	H003	0.102		0.288951841		5
+Brachypodium	rupestre	17.07.	ORGI1	4	4	0.497	H004	0.125		0.251509054		5
+Brachypodium	rupestre	17.07.	ORGI1	5	4	0.293	H005	0.066		0.225255973		5
+Brachypodium	rupestre	17.07.	ORGI1	6	4	0.171	H006	0.047		0.274853801		5
+Brachypodium	rupestre	17.07.	ORGI1	7	4	0.269	H007	0.071		0.26394052		5
+Brachypodium	rupestre	17.07.	ORGI1	8	4	0.307	H008	0.089		0.28990228		5
+Brachypodium	rupestre	17.07.	ORGI1	9	3	0.142	H009	0.036		0.253521127		5
+Valeriana	officinalis	17.07.	ORGI1	1	2	0.719	H010	0.095		0.132127955		5
+Valeriana	officinalis	17.07.	ORGI1	2	2	0.814	H011	0.102		0.125307125		5
+Valeriana	officinalis	17.07.	ORGI1	3	3	1.151	H012	0.136		0.118158123		5
+Valeriana	officinalis	17.07.	ORGI1	4	3	0.698	H013	0.094		0.134670487		5
+Valeriana	officinalis	17.07.	ORGI1	5	2	0.919	H014	0.119		0.129488575		5
+Valeriana	officinalis	17.07.	ORGI1	6	1	0.311	H015	0.032		0.102893891		5
+Valeriana	officinalis	17.07.	ORGI1	7	1	0.449	H016	0.048		0.106904232		5
+Valeriana	officinalis	17.07.	ORGI1	8	2	0.476	H017	0.046		0.096638655		5
